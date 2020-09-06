@@ -13,13 +13,26 @@ class User:
         return
 
 
-
+#jinjia2,  在html中可以传参， {{var}}   -------> render_template(index.html, var='hello')
+#s也可使用function， {{var.fun()}}
 @app.route('/')
 @app.route('/index')
 def index():
     #return 'hello world'
-    return render_template('index.html', title = "this is title", text = "this is text", user= User('siyuan','xiao'))
+    return render_template('index.html')
+
+@app.route('/add')
+def add():
+    return render_template('add.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = False)
